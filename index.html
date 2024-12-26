@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player </title>
+    <script src="https://kit.fontawesome.com/001d067b57.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="container">
+    <div class="music-player">
+        <div class="header">
+            <div class="circle">
+            <i class="fa-solid fa-angle-left"></i>
+        </div>
+        <div class="circle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        </div>
+        <div class="player">
+            <div class="circle">
+            <img src="emptiness.jpeg" alt="">
+
+        </div>
+    </div>
+    <div class="name">
+        <h3><b>Emptiness</b></h2>
+        <p>Gajendra Verma</p>
+    </div>
+        <div class="silder">
+        <audio id="song" >
+            <source src="128-Tune Mere Jana 128 Kbps.mp3" type="audio/mpeg">
+        </audio>
+        <input type="range" value="0" id="progress">
+        <div class="controls" id="song">
+            <div><i class="fa-solid fa-step-backward"></i></div>
+            <div onclick="playPause()"><i class="fa-solid fa-play" id="ctrlIcon"></i></div>
+            <div><i class="fa-solid fa-step-forward"></i></div>
+        
+    </div>
+    </div>
+    </div>
+   </div>
+
+   <script>
+
+    let progress = document.getElementById('progress');
+    let song = document.getElementById('song');
+    let ctrlIcon = document.getElementById('ctrlIcon');
+
+    function playPause() {
+        if (song.paused) {
+            song.play();
+            ctrlIcon.classList.remove('fa-play');
+            ctrlIcon.classList.add('fa-pause');
+        } else {
+            song.pause();
+            ctrlIcon.classList.remove('fa-pause');
+            ctrlIcon.classList.add('fa-play');
+        }
+    }
+
+    song.ontimeupdate = function() {
+        progress.value = (song.currentTime / song.duration) * 100;
+    };
+
+    progress.oninput = function() {
+        song.currentTime = (progress.value / 100) * song.duration;
+    };
+
+   </script>
+</body>
+</html>
